@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projetos.despachante.entities.Role;
+import com.projetos.despachante.dto.RoleDTO;
 import com.projetos.despachante.services.RoleService;
 
 @RestController
@@ -19,8 +19,8 @@ public class RoleResource {
 	private RoleService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Role>> findAll() {
-		List<Role> list = service.findAll();
+	public ResponseEntity<List<RoleDTO>> findAll() {
+		List<RoleDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 }
