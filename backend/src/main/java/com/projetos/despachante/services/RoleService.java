@@ -34,4 +34,12 @@ public class RoleService {
 		Role entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
 		return new RoleDTO(entity);
 	}
+
+	@Transactional(readOnly = true)
+	public RoleDTO insert(RoleDTO dto) {
+		Role entity = new Role();
+		entity.setAuthority(dto.getAuthority());
+		entity = repository.save(entity);
+		return new RoleDTO(entity);
+	}
 }
