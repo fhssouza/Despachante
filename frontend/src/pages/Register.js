@@ -1,15 +1,41 @@
-import logo from '../img/clickdesk_logo.png'
 import { useState } from 'react'
 
+import logo from '../img/clickdesk_logo.png'
+import api from '../services/api'
 import './Register.css'
 
 
 export const Register
 
   = () => {
+    const [fistName, setFistName] = useState(" ")
+    const [lastName, setLastName] = useState(" ")
     const [email, setEmail] = useState(" ")
     const [password, setPassword] = useState(" ")
-    const [name, setName] = useState(" ")
+
+    async function handleSubmit() {
+      const data = {
+        fistName:fistName, 
+        lastName:lastName, 
+        email:email, 
+        password:password}
+
+      if(fistName !== "" && lastName !== ""&& email !== "" && password !== ""){
+        
+        const response = await api.post('/users', data);
+        if(response.status === 200) {
+          window.location.href='/'
+        }else {
+          alert('Error ao cadastrar o usuario');
+        }
+      }else {
+        alert('Preencha todos os campos');
+      }
+
+      
+
+    }
+    
 
     return (
       <div className="container">
@@ -22,12 +48,21 @@ export const Register
               </span>
               <div className="wrap-input">
                 <input
-                  className={name !== "" ? 'has-val input' : 'input'}
+                  className={fistName !== "" ? 'has-val input' : 'input'}
                   type='text'
-                  value={name}
-                  onChange={e => setName(e.target.value)}
+                  value={fistName}
+                  onChange={e => setFistName(e.target.value)}
                 />
-                <span className="focus-input" data-placehoder="Nome Completo"></span>
+                <span className="focus-input" data-placehoder="Nome"></span>
+              </div>
+              <div className="wrap-input">
+                <input
+                  className={lastName !== "" ? 'has-val input' : 'input'}
+                  type='text'
+                  value={lastName}
+                  onChange={e => setLastName(e.target.value)}
+                />
+                <span className="focus-input" data-placehoder="Sobrenome"></span>
               </div>
               <div className="wrap-input">
                 <input
@@ -48,7 +83,7 @@ export const Register
                 <span className="focus-input" data-placehoder="Password"></span>
               </div>
               <div className="container-login-form-btn">
-                <button className="login-form-btn">
+                <button className="login-form-btn" onClick={handleSubmit}>
                   cadastre-se
                 </button>
                 <div className="text-center">
