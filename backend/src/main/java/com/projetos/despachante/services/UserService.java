@@ -12,8 +12,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.projetos.despachante.dto.RoleDTO;
 import com.projetos.despachante.dto.UserDTO;
+import com.projetos.despachante.entities.Role;
 import com.projetos.despachante.entities.User;
+import com.projetos.despachante.repositories.RoleRepository;
 import com.projetos.despachante.repositories.UserRepository;
 import com.projetos.despachante.services.exceptions.DatabaseException;
 import com.projetos.despachante.services.exceptions.ResourceNotFoundException;
@@ -23,6 +26,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
 
 	@Transactional(readOnly = true)
 	public List<UserDTO> findAll() {
@@ -43,7 +49,7 @@ public class UserService {
 	@Transactional
 	public UserDTO insert(UserDTO dto) {
 		User entity = new User();
-		//entity.setAuthority(dto.getAuthority());
+		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}
@@ -52,7 +58,7 @@ public class UserService {
 	public UserDTO update(Long id, UserDTO dto) {
 		try {
 			User entity = repository.getOne(id);
-			//entity.setAuthority(dto.getAuthority());
+			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
 			return new UserDTO(entity);
 		} catch (EntityNotFoundException e) {
@@ -70,4 +76,19 @@ public class UserService {
 			throw new DatabaseException("Integrity violation");
 		}
 	}
+	
+	private void copyDtoToEntity(UserDTO dto, User entity) {
+		
+		entity.setFistName(dto.getFistName());
+		entity.setLastName(dto.getLastName());
+		entity.setEmail(dto.getEmail());
+		entity.setPassword(dto.getPassword());
+		
+		entity.getRoles().clear();
+		for(RoleDTO rolDto : dto.getRoles()) {
+			Role role = roleRepository.getOne(rolDto.getId());
+			entity.getRoles().add(role);
+		}
+	}
+
 }
