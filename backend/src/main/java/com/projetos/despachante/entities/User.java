@@ -22,7 +22,7 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String fistName;
+	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
@@ -39,7 +39,7 @@ public class User implements Serializable {
 
 	public User(Long id, String fistName, String lastName, String email, String password) {
 		this.id = id;
-		this.fistName = fistName;
+		this.firstName = fistName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
@@ -54,11 +54,11 @@ public class User implements Serializable {
 	}
 
 	public String getFistName() {
-		return fistName;
+		return firstName;
 	}
 
 	public void setFistName(String fistName) {
-		this.fistName = fistName;
+		this.firstName = fistName;
 	}
 
 	public String getLastName() {
