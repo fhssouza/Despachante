@@ -1,9 +1,10 @@
 package com.projetos.despachante.resources;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projetos.despachante.dto.UserDTO;
+import com.projetos.despachante.dto.UserInsertDTO;
 import com.projetos.despachante.services.UserService;
 
 @RestController
@@ -24,10 +26,11 @@ public class UserResource {
 
 	@Autowired
 	private UserService service;
-
+	
 	@GetMapping
-	public ResponseEntity<List<UserDTO>> findAll() {
-		List<UserDTO> list = service.findAll();
+	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
+		
+		Page<UserDTO> list = service.findAllPaged(pageable);
 		return ResponseEntity.ok().body(list);
 	}
 
@@ -38,10 +41,11 @@ public class UserResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<UserDTO> insert(@RequestBody UserDTO dto) {
-		dto = service.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+	public ResponseEntity<UserDTO> insert (@RequestBody UserInsertDTO dto){
+		UserDTO newDTO= service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(newDTO.getId()).toUri();
+		return ResponseEntity.created(uri).body(newDTO);
 	}
 
 	@PutMapping(value = "/{id}")

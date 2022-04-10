@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,10 +26,12 @@ public class User implements Serializable {
 	private Long id;
 	private String firstName;
 	private String lastName;
+	
+	@Column(unique = true)
 	private String email;
 	private String password;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name= "tb_user_role", 
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -37,9 +41,9 @@ public class User implements Serializable {
 
 	}
 
-	public User(Long id, String fistName, String lastName, String email, String password) {
+	public User(Long id, String firstName, String lastName, String email, String password) {
 		this.id = id;
-		this.firstName = fistName;
+		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
@@ -53,12 +57,12 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getFistName() {
+	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFistName(String fistName) {
-		this.firstName = fistName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
