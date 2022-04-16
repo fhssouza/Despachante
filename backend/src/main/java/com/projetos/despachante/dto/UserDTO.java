@@ -1,49 +1,47 @@
 package com.projetos.despachante.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-import com.projetos.despachante.entities.Role;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import com.projetos.despachante.entities.User;
 
 public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private String     const [name, setName] = useState(" ")
-;
+	
+	@NotBlank(message = "Campo obrigatório")
+	private String firstName;
+	
+	@NotBlank(message = "Campo obrigatório")
 	private String lastName;
+	
+	@Email(message = "Favor entrar com um email válido")
 	private String email;
-	private String password;
 
-	private List<RoleDTO> roles = new ArrayList<>();
+	Set<RoleDTO> roles = new HashSet<>();
 
 	public UserDTO() {
 
 	}
 
-	public UserDTO(Long id, String fistName, String lastName, String email, String password) {
-		super();
+	public UserDTO(Long id, String firstName, String lastName, String email, String password) {
 		this.id = id;
-		this.fistName = fistName;
+		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.password = password;
 	}
 
 	public UserDTO(User entity) {
-		this.id = entity.getId();
-		this.fistName = entity.getFistName();
-		this.lastName = entity.getLastName();
-		this.email = entity.getEmail();
-		this.password = entity.getPassword();
-	}
-
-	public UserDTO(User entity, Set<Role> roles) {
-		this(entity);
-		roles.forEach(rol -> this.roles.add(new RoleDTO(rol)));
+		id = entity.getId();
+		firstName = entity.getFirstName();
+		lastName = entity.getEmail();
+		email = entity.getEmail();
+		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
 	}
 
 	public Long getId() {
@@ -54,12 +52,12 @@ public class UserDTO implements Serializable {
 		this.id = id;
 	}
 
-	public String getFistName() {
-		return fistName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFistName(String fistName) {
-		this.fistName = fistName;
+	public void setFistName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
@@ -78,20 +76,8 @@ public class UserDTO implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public List<RoleDTO> getRoles() {
+	public Set<RoleDTO> getRoles() {
 		return roles;
-	}
-
-	public void setRoles(List<RoleDTO> roles) {
-		this.roles = roles;
 	}
 
 }
