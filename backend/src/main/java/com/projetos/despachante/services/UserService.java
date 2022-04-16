@@ -1,49 +1,58 @@
 package com.projetos.despachante.services;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.projetos.despachante.dto.RoleDTO;
 import com.projetos.despachante.dto.UserDTO;
+import com.projetos.despachante.dto.UserInsertDTO;
+import com.projetos.despachante.entities.Role;
 import com.projetos.despachante.entities.User;
+import com.projetos.despachante.repositories.RoleRepository;
 import com.projetos.despachante.repositories.UserRepository;
 import com.projetos.despachante.services.exceptions.DatabaseException;
 import com.projetos.despachante.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
 	private UserRepository repository;
-
+	
+	@Autowired
+	private RoleRepository roleRepository;
+	
 	@Transactional(readOnly = true)
-	public List<UserDTO> findAll() {
-		List<User> list = repository.findAll();
-
-		List<UserDTO> listDTO = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
-
-		return listDTO;
+	public Page<UserDTO> findAllPaged(Pageable pageable) {
+		Page<User> list = repository.findAll(pageable);
+		return list.map(x -> new UserDTO(x));
 	}
 
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new UserDTO(entity, entity.getRoles());
+		return new UserDTO(entity);
 	}
 
 	@Transactional
-	public UserDTO insert(UserDTO dto) {
+	public UserDTO insert(UserInsertDTO dto) {
 		User entity = new User();
-		//entity.setAuthority(dto.getAuthority());
+		copyDtoToEntity(dto, entity);
+		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}
@@ -52,7 +61,7 @@ public class UserService {
 	public UserDTO update(Long id, UserDTO dto) {
 		try {
 			User entity = repository.getOne(id);
-			//entity.setAuthority(dto.getAuthority());
+			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
 			return new UserDTO(entity);
 		} catch (EntityNotFoundException e) {
@@ -70,4 +79,18 @@ public class UserService {
 			throw new DatabaseException("Integrity violation");
 		}
 	}
+	
+	private void copyDtoToEntity(UserDTO dto, User entity) {
+		
+		entity.setFirstName(dto.getFirstName());
+		entity.setLastName(dto.getLastName());
+		entity.setEmail(dto.getEmail());
+		
+		entity.getRoles().clear();
+		for(RoleDTO roleDto : dto.getRoles()) {
+			Role role = roleRepository.getOne(roleDto.getId());
+			entity.getRoles().add(role);
+		}
+	}
+
 }
