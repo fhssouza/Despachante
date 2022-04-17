@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.form`
   width: 400px;
   height: 500px;
   background-color: #202024;
@@ -57,6 +57,12 @@ export const Input = styled.input`
   font-size: 15px;
 `;
 
+export const InputSelect = styled.select`
+  background-color: #000;
+  color: #555;
+  border: none;
+`;
+
 export const Span = styled.span`
   cursor: pointer;
   font-size: 14px;
@@ -78,20 +84,6 @@ export const Span = styled.span`
     opacity: 1;
   }
 `;
-
-// export const Link = styled.a`
-//   cursor: pointer;
-//   text-decoration: none;
-//   font-size: 14px;
-//   font-weight: 600;
-//   opacity: 0.9;
-//   align-self: flex-start;
-//   color: ${(props) => (props.color ? props.color : "white")};
-//   &:hover {
-//     transition: opacity 0.2s ease 0s;
-//     opacity: 1;
-//   }
-// `;
 
 export const ButtonLogin = styled.button`
   width: 100%;

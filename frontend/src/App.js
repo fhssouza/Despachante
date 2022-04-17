@@ -11,7 +11,6 @@ import GlobalStyles from "./GlobalStyles/GlobalStyles";
 const App = () => {
   return (
     <>
-      
       <div>
         <AppRoutes />
         <GlobalStyles />

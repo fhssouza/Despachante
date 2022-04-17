@@ -9,15 +9,33 @@ import {
   Span,
   ButtonLogin,
   RegisterContent,
+  InputSelect,
 } from "./styles";
-import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
-export const Login = () => {
+export const Register = () => {
   const [typePassword, setTypePassword] = useState("password");
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
-  const [password, setPasword] = useState();
+  const [password, setPassword] = useState();
+  const [role, setRole] = useState();
+
+  // const handleName = (e) => {
+  //   setFirstName(e.target.value);
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Enviando formulario");
+    console.log(firstName, lastName, email, password);
+
+    // limpar formularios com redirect não faz sentido
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+  };
 
   const changeTypePassword = () => {
     if (typePassword === "password") {
@@ -28,10 +46,10 @@ export const Login = () => {
   };
 
   return (
-    <Container>
+    <Container onSubmit={handleSubmit}>
       <Content>
         <InputContent>
-          <FaEnvelope />
+          <FaUser />
           <Input
             type="text"
             placeholder="Nome"
@@ -40,7 +58,7 @@ export const Login = () => {
           />
         </InputContent>
         <InputContent>
-          <FaEnvelope />
+          <FaUser />
           <Input
             type="text"
             placeholder="Sobrenome"
@@ -63,7 +81,7 @@ export const Login = () => {
             type={typePassword}
             placeholder="Senha"
             value={password}
-            onChange={(e) => setPasword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           {typePassword === "password" ? (
@@ -71,6 +89,17 @@ export const Login = () => {
           ) : (
             <FaEyeSlash onClick={changeTypePassword} />
           )}
+        </InputContent>
+
+        <InputContent>
+          <FaUser />
+          {/* verificar como esconter este select */}
+          <InputSelect
+            type="text"
+            placeholder="Role"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+          />
         </InputContent>
         <Span color="#fdba13"></Span>
 
@@ -88,4 +117,4 @@ export const Login = () => {
     </Container>
   );
 };
-export default Login;
+export default Register;
