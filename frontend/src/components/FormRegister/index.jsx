@@ -14,12 +14,15 @@ import {
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const Register = () => {
+  
   const [typePassword, setTypePassword] = useState("password");
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [role, setRole] = useState();
+  const [role, setRole] = useState("user");
+
+  
 
   // const handleName = (e) => {
   //   setFirstName(e.target.value);
@@ -28,7 +31,7 @@ export const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Enviando formulario");
-    console.log(firstName, lastName, email, password);
+    console.log(firstName, lastName, email, password, role);
 
     // limpar formularios com redirect não faz sentido
     setFirstName("");
@@ -90,21 +93,24 @@ export const Register = () => {
             <FaEyeSlash onClick={changeTypePassword} />
           )}
         </InputContent>
-
         <InputContent>
           <FaUser />
           {/* verificar como esconter este select */}
           <InputSelect
             type="text"
-            placeholder="Role"
             value={role}
             onChange={(e) => setRole(e.target.value)}
-          />
+            name={role}
+            disabled={true}
+          >
+            <option value="" hidden>
+              Role
+            </option>
+            <option value="user">Usuario</option>
+            <option value="admin">Admin</option>
+            <option value="teste">teste</option>
+          </InputSelect>
         </InputContent>
-        <Span color="#fdba13"></Span>
-
-        <ButtonLogin disabled={!email || !password}>ENTRAR</ButtonLogin>
-
         <RegisterContent>
           <Span color="#ccc">
             Já tem uma conta?
@@ -113,6 +119,9 @@ export const Register = () => {
             </Link>
           </Span>
         </RegisterContent>
+        <Span color="#fdba13"></Span>
+
+        <ButtonLogin disabled={!email || !password}>ENTRAR</ButtonLogin>
       </Content>
     </Container>
   );

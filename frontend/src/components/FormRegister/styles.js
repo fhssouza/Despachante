@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.form`
   width: 400px;
-  height: 500px;
+  height: 550px;
   background-color: #202024;
   border-radius: 5px;
   display: flex;
@@ -58,9 +58,16 @@ export const Input = styled.input`
 `;
 
 export const InputSelect = styled.select`
-  background-color: #000;
-  color: #555;
+  width: 83%;
+  background-color: #121214;
+  color: #333;
   border: none;
+  &:hover {
+    ${(props) =>
+      props.disabled === false
+        ? "transition: 0.2s ease; opacity: 1;"
+        : "cursor: not-allowed;"}
+  }
 `;
 
 export const Span = styled.span`
