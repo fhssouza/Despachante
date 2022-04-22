@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-
+import { useFetch } from "../../hooks/useFetch";
 import {
   Container,
   Content,
@@ -13,7 +13,6 @@ import {
   InputSelect,
 } from "./styles";
 
-// const urlRoles = "http://localhost:8080/roles";
 const urlUsers = "http://localhost:8080/users";
 
 export const Register = () => {
@@ -24,27 +23,13 @@ export const Register = () => {
   const [password, setPassword] = useState();
   const [role, setRole] = useState("user");
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const res = await fetch(urlRoles);
-  //     const data = await res.json();
-
-  //     setRoles(data);
-  //   }
-  //   fetchData();
-  // }, []);
-
-  // console.log(roles);
-
-  // const handleName = (e) => {
-  //   setFirstName(e.target.value);
-  // };
+  const { httpConfig } = useFetch(urlUsers);
 
   // envio do form
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const roleUser = {
+    const user = {
       firstName,
       lastName,
       email,
@@ -52,16 +37,7 @@ export const Register = () => {
       role,
     };
 
-    const res = await fetch(urlUsers, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(roleUser),
-    });
-
-    console.log("Enviando formulario");
-    console.log(roleUser);
+    httpConfig(user, "POST");
 
     // limpar formularios com redirect não faz sentido
     setFirstName("");
