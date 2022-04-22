@@ -1,5 +1,6 @@
 import React from "react";
 import AppRoutes from "./routes";
+//hooks
 
 //pages
 
@@ -11,7 +12,6 @@ import GlobalStyles from "./GlobalStyles/GlobalStyles";
 const App = () => {
   return (
     <>
-      
       <div>
         <AppRoutes />
         <GlobalStyles />

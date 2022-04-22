@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.form`
   width: 400px;
   height: 350px;
   background-color: #202024;
@@ -90,6 +90,7 @@ export const ButtonLogin = styled.button`
   height: 50px;
   opacity: 0.9;
   margin: 20px 0;
+  font-size: 1.1em;
   &:hover {
     ${(props) =>
       props.disabled === false

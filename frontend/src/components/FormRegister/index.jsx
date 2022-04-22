@@ -1,23 +1,50 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { useFetch } from "../../hooks/useFetch";
 import {
   Container,
   Content,
   InputContent,
   Input,
   Span,
-  ButtonLogin,
+  ButtonRegister,
   RegisterContent,
+  InputSelect,
 } from "./styles";
-import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
-export const Login = () => {
+const urlUsers = "http://localhost:8080/users";
+
+export const Register = () => {
   const [typePassword, setTypePassword] = useState("password");
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
-  const [password, setPasword] = useState();
+  const [password, setPassword] = useState();
+  const [role, setRole] = useState("user");
+
+  const { httpConfig } = useFetch(urlUsers);
+
+  // envio do form
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const user = {
+      firstName,
+      lastName,
+      email,
+      password,
+      role,
+    };
+
+    httpConfig(user, "POST");
+
+    // limpar formularios com redirect não faz sentido
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+  };
 
   const changeTypePassword = () => {
     if (typePassword === "password") {
@@ -28,10 +55,10 @@ export const Login = () => {
   };
 
   return (
-    <Container>
+    <Container onSubmit={handleSubmit}>
       <Content>
         <InputContent>
-          <FaEnvelope />
+          <FaUser />
           <Input
             type="text"
             placeholder="Nome"
@@ -40,7 +67,7 @@ export const Login = () => {
           />
         </InputContent>
         <InputContent>
-          <FaEnvelope />
+          <FaUser />
           <Input
             type="text"
             placeholder="Sobrenome"
@@ -63,7 +90,7 @@ export const Login = () => {
             type={typePassword}
             placeholder="Senha"
             value={password}
-            onChange={(e) => setPasword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           {typePassword === "password" ? (
@@ -72,10 +99,23 @@ export const Login = () => {
             <FaEyeSlash onClick={changeTypePassword} />
           )}
         </InputContent>
-        <Span color="#fdba13"></Span>
-
-        <ButtonLogin disabled={!email || !password}>ENTRAR</ButtonLogin>
-
+        <InputContent>
+          <FaUser />
+          {/* verificar como esconter este select */}
+          <InputSelect
+            type="text"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            name={role}
+            disabled={true}
+            multiple={false}
+          >
+            <option value="" hidden>
+              Roles
+            </option>
+            <option value="user">Usuario</option>
+          </InputSelect>
+        </InputContent>
         <RegisterContent>
           <Span color="#ccc">
             Já tem uma conta?
@@ -84,8 +124,13 @@ export const Login = () => {
             </Link>
           </Span>
         </RegisterContent>
+        <Span color="#fdba13"></Span>
+
+        <ButtonRegister disabled={!email || !password}>
+          Cadastrar
+        </ButtonRegister>
       </Content>
     </Container>
   );
 };
-export default Login;
+export default Register;

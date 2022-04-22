@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.form`
   width: 400px;
-  height: 500px;
+  height: 550px;
   background-color: #202024;
   border-radius: 5px;
   display: flex;
@@ -57,6 +57,19 @@ export const Input = styled.input`
   font-size: 15px;
 `;
 
+export const InputSelect = styled.select`
+  width: 83%;
+  background-color: #121214;
+  color: #333;
+  border: none;
+  &:hover {
+    ${(props) =>
+      props.disabled === false
+        ? "transition: 0.2s ease; opacity: 1;"
+        : "cursor: not-allowed;"}
+  }
+`;
+
 export const Span = styled.span`
   cursor: pointer;
   font-size: 14px;
@@ -79,21 +92,7 @@ export const Span = styled.span`
   }
 `;
 
-// export const Link = styled.a`
-//   cursor: pointer;
-//   text-decoration: none;
-//   font-size: 14px;
-//   font-weight: 600;
-//   opacity: 0.9;
-//   align-self: flex-start;
-//   color: ${(props) => (props.color ? props.color : "white")};
-//   &:hover {
-//     transition: opacity 0.2s ease 0s;
-//     opacity: 1;
-//   }
-// `;
-
-export const ButtonLogin = styled.button`
+export const ButtonRegister = styled.button`
   width: 100%;
   cursor: pointer;
   /* background: #fdba13; */
@@ -105,6 +104,7 @@ export const ButtonLogin = styled.button`
   height: 50px;
   opacity: 0.9;
   margin: 20px 0;
+  font-size: 1.1em;
   &:hover {
     ${(props) =>
       props.disabled === false
