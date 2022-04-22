@@ -92,7 +92,7 @@ export const Span = styled.span`
   }
 `;
 
-export const ButtonLogin = styled.button`
+export const ButtonRegister = styled.button`
   width: 100%;
   cursor: pointer;
   /* background: #fdba13; */
@@ -104,6 +104,7 @@ export const ButtonLogin = styled.button`
   height: 50px;
   opacity: 0.9;
   margin: 20px 0;
+  font-size: 1.1em;
   &:hover {
     ${(props) =>
       props.disabled === false

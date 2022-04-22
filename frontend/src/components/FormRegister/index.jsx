@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
 import {
   Container,
@@ -7,14 +8,15 @@ import {
   InputContent,
   Input,
   Span,
-  ButtonLogin,
+  ButtonRegister,
   RegisterContent,
   InputSelect,
 } from "./styles";
-import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+
+// const urlRoles = "http://localhost:8080/roles";
+const urlUsers = "http://localhost:8080/users";
 
 export const Register = () => {
-  
   const [typePassword, setTypePassword] = useState("password");
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -22,16 +24,44 @@ export const Register = () => {
   const [password, setPassword] = useState();
   const [role, setRole] = useState("user");
 
-  
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const res = await fetch(urlRoles);
+  //     const data = await res.json();
+
+  //     setRoles(data);
+  //   }
+  //   fetchData();
+  // }, []);
+
+  // console.log(roles);
 
   // const handleName = (e) => {
   //   setFirstName(e.target.value);
   // };
 
-  const handleSubmit = (e) => {
+  // envio do form
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const roleUser = {
+      firstName,
+      lastName,
+      email,
+      password,
+      role,
+    };
+
+    const res = await fetch(urlUsers, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(roleUser),
+    });
+
     console.log("Enviando formulario");
-    console.log(firstName, lastName, email, password, role);
+    console.log(roleUser);
 
     // limpar formularios com redirect não faz sentido
     setFirstName("");
@@ -102,13 +132,12 @@ export const Register = () => {
             onChange={(e) => setRole(e.target.value)}
             name={role}
             disabled={true}
+            multiple={false}
           >
             <option value="" hidden>
-              Role
+              Roles
             </option>
             <option value="user">Usuario</option>
-            <option value="admin">Admin</option>
-            <option value="teste">teste</option>
           </InputSelect>
         </InputContent>
         <RegisterContent>
@@ -121,7 +150,9 @@ export const Register = () => {
         </RegisterContent>
         <Span color="#fdba13"></Span>
 
-        <ButtonLogin disabled={!email || !password}>ENTRAR</ButtonLogin>
+        <ButtonRegister disabled={!email || !password}>
+          Cadastrar
+        </ButtonRegister>
       </Content>
     </Container>
   );

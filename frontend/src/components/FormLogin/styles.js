@@ -90,6 +90,7 @@ export const ButtonLogin = styled.button`
   height: 50px;
   opacity: 0.9;
   margin: 20px 0;
+  font-size: 1.1em;
   &:hover {
     ${(props) =>
       props.disabled === false
