@@ -15,12 +15,17 @@ export const Container = styled.form`
 
 export const Content = styled.div`
   width: 80%;
-  height: 75%;
+  height: 85%;
   max-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  img {
+    width: 150px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const InputContent = styled.div`
@@ -57,18 +62,18 @@ export const Input = styled.input`
   font-size: 15px;
 `;
 
-export const InputSelect = styled.select`
-  width: 83%;
-  background-color: #121214;
-  color: #333;
-  border: none;
-  &:hover {
-    ${(props) =>
-      props.disabled === false
-        ? "transition: 0.2s ease; opacity: 1;"
-        : "cursor: not-allowed;"}
-  }
-`;
+// export const InputSelect = styled.select`
+//   width: 83%;
+//   background-color: #121214;
+//   color: #333;
+//   border: none;
+//   &:hover {
+//     ${(props) =>
+//       props.disabled === false
+//         ? "transition: 0.2s ease; opacity: 1;"
+//         : "cursor: not-allowed;"}
+//   }
+// `;
 
 export const Span = styled.span`
   cursor: pointer;

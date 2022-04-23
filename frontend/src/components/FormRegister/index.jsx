@@ -10,8 +10,9 @@ import {
   Span,
   ButtonRegister,
   RegisterContent,
-  InputSelect,
+  
 } from "./styles";
+import Logo from "../../assets/clickdespLogo.png";
 
 const urlUsers = "http://localhost:8080/users";
 
@@ -21,7 +22,7 @@ export const Register = () => {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [role, setRole] = useState("user");
+  
 
   const { httpConfig } = useFetch(urlUsers);
 
@@ -34,7 +35,7 @@ export const Register = () => {
       lastName,
       email,
       password,
-      role,
+      
     };
 
     httpConfig(user, "POST");
@@ -57,6 +58,7 @@ export const Register = () => {
   return (
     <Container onSubmit={handleSubmit}>
       <Content>
+        <img src={Logo} alt="logo" />
         <InputContent>
           <FaUser />
           <Input
@@ -99,23 +101,7 @@ export const Register = () => {
             <FaEyeSlash onClick={changeTypePassword} />
           )}
         </InputContent>
-        <InputContent>
-          <FaUser />
-          {/* verificar como esconter este select */}
-          <InputSelect
-            type="text"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            name={role}
-            disabled={true}
-            multiple={false}
-          >
-            <option value="" hidden>
-              Roles
-            </option>
-            <option value="user">Usuario</option>
-          </InputSelect>
-        </InputContent>
+
         <RegisterContent>
           <Span color="#ccc">
             Já tem uma conta?
