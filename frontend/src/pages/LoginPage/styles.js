@@ -1,8 +1,17 @@
 import styled from "styled-components";
 
-export const Container = styled.form`
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+`;
+
+export const ContainerForm = styled.form`
   width: 400px;
-  height: 550px;
+  height: 500px;
   background-color: #202024;
   border-radius: 5px;
   display: flex;
@@ -15,7 +24,7 @@ export const Container = styled.form`
 
 export const Content = styled.div`
   width: 80%;
-  height: 85%;
+  height: 75%;
   max-width: 300px;
   display: flex;
   flex-direction: column;
@@ -62,29 +71,15 @@ export const Input = styled.input`
   font-size: 15px;
 `;
 
-// export const InputSelect = styled.select`
-//   width: 83%;
-//   background-color: #121214;
-//   color: #333;
-//   border: none;
-//   &:hover {
-//     ${(props) =>
-//       props.disabled === false
-//         ? "transition: 0.2s ease; opacity: 1;"
-//         : "cursor: not-allowed;"}
-//   }
-// `;
-
 export const Span = styled.span`
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
   opacity: 0.9;
-  align-self: flex-start;
+  align-self: center;
   color: ${(props) => (props.color ? props.color : "white")};
   a {
     text-decoration: none;
-    cursor: pointer;
     font-size: 14px;
     font-weight: 600;
     opacity: 0.9;
@@ -97,7 +92,7 @@ export const Span = styled.span`
   }
 `;
 
-export const ButtonRegister = styled.button`
+export const ButtonLogin = styled.button`
   width: 100%;
   cursor: pointer;
   /* background: #fdba13; */
@@ -118,4 +113,8 @@ export const ButtonRegister = styled.button`
   }
 `;
 
-export const RegisterContent = styled.div``;
+export const RegisterContent = styled.div`
+  a {
+    margin-left: 5px;
+  }
+`;

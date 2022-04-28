@@ -1,21 +1,13 @@
-import React from "react";
-import AppRoutes from "./routes";
-//hooks
-
 //pages
-
-//components
-
+import AppRoutes from "./routes/index.routes";
 //styles
-import GlobalStyles from "./GlobalStyles/GlobalStyles";
+import GlobalStyles from "./globalStyles/GlobalStyles";
 
 const App = () => {
   return (
     <>
-      <div>
-        <AppRoutes />
-        <GlobalStyles />
-      </div>
+      <GlobalStyles />
+      <AppRoutes />
     </>
   );
 };
