@@ -1,5 +1,6 @@
 //pages
-import AppRoutes from "./routes/index.routes";
+import Layout from "./components/Layout";
+import Dashboard from "./pages/Dashboard";
 //styles
 import GlobalStyles from "./globalStyles/GlobalStyles";
 
@@ -7,7 +8,9 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      <AppRoutes />
+      <Layout>
+        <Dashboard/>
+      </Layout>
     </>
   );
 };

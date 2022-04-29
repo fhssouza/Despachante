@@ -1,11 +1,11 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Container = styled.div`
-    display: grid;
-    grid-template-columns: 200px auto;
-    grid-template-rows: 70px auto;
-    grid-template-areas: 
-    'AS MH'
-    'AS CT';
-    height: 100vh;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: 70px auto;
+  grid-template-areas:
+    "AS MH"
+    "AS CT";
 `;

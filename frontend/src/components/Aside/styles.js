@@ -6,7 +6,7 @@ export const Container = styled.div`
   color: #fff;
   background-color: #111;
   padding-left: 0 20px;
-  border-right: #fff solid 1px;
+  border-right: #fdba13 solid 1px;
 `;
 
 export const Header = styled.header`
@@ -30,7 +30,7 @@ export const MenuContainer = styled.nav`
 export const MenuItemLink = styled.a`
   display: flex;
   align-items: center;
-  color: #fff;
+  color: #fdba13;
   text-decoration: none;
   transition: opacity 0.3s;
   margin: 7px 0;

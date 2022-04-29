@@ -13,7 +13,7 @@ import {
   MdExitToApp,
   MdDocumentScanner,
   MdPerson,
-  MdHandyman,
+  MdHome,
 } from "react-icons/md";
 
 const Aside = () => {
@@ -24,6 +24,10 @@ const Aside = () => {
       </Header>
       <MenuContainer>
         <MenuItemLink href="#">
+          <MdHome />
+          Home
+        </MenuItemLink>
+        <MenuItemLink href="#">
           <MdDashboard />
           Dashboard
         </MenuItemLink>
@@ -32,12 +36,8 @@ const Aside = () => {
           Clientes
         </MenuItemLink>
         <MenuItemLink href="#">
-          <MdHandyman />
-          Serviços
-        </MenuItemLink>
-        <MenuItemLink href="#">
           <MdDirectionsCar />
-          Produtos
+          Serviços
         </MenuItemLink>
         <MenuItemLink href="#">
           <MdDocumentScanner />

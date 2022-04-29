@@ -7,15 +7,15 @@ export const Container = styled.div`
   justify-content: end;
   align-items: center;
   padding: 0 10px;
-  border-bottom: #fff solid 1px;
+  border-bottom: #fdba13 solid 1px;
 `;
 
-export const Profile = styled.div`
-  color: #fff;
-`;
+export const Profile = styled.div``;
 
 export const Welcome = styled.h3`
-  color: #ffff;
+  color: #fdba13;
 `;
 
-export const UserName = styled.span``;
+export const UserName = styled.span`
+  color: #fdba13;
+`;
