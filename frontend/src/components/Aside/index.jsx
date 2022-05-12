@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Header,
@@ -23,26 +24,36 @@ const Aside = () => {
         <LogImg src={Logo} alt="logo ClickDesp" />
       </Header>
       <MenuContainer>
-        <MenuItemLink href="#">
-          <MdHome />
-          Home
-        </MenuItemLink>
-        <MenuItemLink href="#">
-          <MdDashboard />
-          Dashboard
-        </MenuItemLink>
-        <MenuItemLink href="#">
-          <MdPerson />
-          Clientes
-        </MenuItemLink>
-        <MenuItemLink href="#">
-          <MdDirectionsCar />
-          Serviços
-        </MenuItemLink>
-        <MenuItemLink href="#">
-          <MdDocumentScanner />
-          Orçamentos
-        </MenuItemLink>
+        <Link to="/">
+          <MenuItemLink>
+            <MdHome />
+            Home
+          </MenuItemLink>
+        </Link>
+        <Link to="/dashborad">
+          <MenuItemLink>
+            <MdDashboard />
+            Dashboard
+          </MenuItemLink>
+        </Link>
+        <Link to="/clients">
+          <MenuItemLink>
+            <MdPerson />
+            Clientes
+          </MenuItemLink>
+        </Link>
+        <Link to="/services">
+          <MenuItemLink>
+            <MdDirectionsCar />
+            Serviços
+          </MenuItemLink>
+        </Link>
+        <Link to="/budgets">
+          <MenuItemLink>
+            <MdDocumentScanner />
+            Orçamentos
+          </MenuItemLink>
+        </Link>
         <MenuItemLink href="#">
           <MdExitToApp />
           Sair

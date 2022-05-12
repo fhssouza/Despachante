@@ -1,13 +1,13 @@
 import React from "react";
 import { Container } from "./styles";
 
-const SelectInput = () => {
+const SelectInput = ({ value, label }) => {
   return (
     <Container>
       <select>
-        <option value="Marcelo">Marcelo</option>
-        <option value="Alberto">Alberto</option>
-        <option value="Alves">Alves</option>
+        <option {...value}>{label}</option>
+        <option {...value}>{label}</option>
+        <option {...value}>{label}</option>
       </select>
     </Container>
   );

@@ -1,16 +1,14 @@
 //pages
-import Layout from "./components/Layout";
-import Dashboard from "./pages/Dashboard";
+
 //styles
 import GlobalStyles from "./globalStyles/GlobalStyles";
+import Routes from "./routes/App.routes";
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Layout>
-        <Dashboard/>
-      </Layout>
+      <Routes />
     </>
   );
 };

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const Container = styled.div`
   grid-area: AS;
   color: #fff;
@@ -14,7 +13,6 @@ export const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  
 `;
 
 export const LogImg = styled.img`
@@ -24,7 +22,7 @@ export const LogImg = styled.img`
 export const MenuContainer = styled.nav`
   display: flex;
   flex-direction: column;
-  margin-top: 50px
+  margin-top: 50px;
 `;
 
 export const MenuItemLink = styled.a`
@@ -37,7 +35,7 @@ export const MenuItemLink = styled.a`
   padding: 0 30px;
 
   &:hover {
-    opacity: .7;
+    opacity: 0.7;
   }
   > svg {
     font-size: 18px;

@@ -2,13 +2,13 @@ import React from "react";
 import { Container } from "./styles";
 import ContentHeader from "../../components/ContentHeader";
 
-const Dashboard = () => {
+const Services = () => {
   return (
     <Container>
       <ContentHeader />
-      Page Dashboard
+      Page Serviços
     </Container>
   );
 };
 
-export default Dashboard;
+export default Services;

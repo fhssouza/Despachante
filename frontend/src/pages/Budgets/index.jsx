@@ -2,13 +2,13 @@ import React from "react";
 import { Container } from "./styles";
 import ContentHeader from "../../components/ContentHeader";
 
-const Dashboard = () => {
+const Budgets = () => {
   return (
     <Container>
       <ContentHeader />
-      Page Dashboard
+      Page Orçamentos
     </Container>
   );
 };
 
-export default Dashboard;
+export default Budgets;
